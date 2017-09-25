@@ -51,10 +51,9 @@ public class Mastermind extends Game {
 
 		System.out.println(this.afficheResultat(combiD, combiC));
 
-		if (combiC.equals(combiD)) {
-			System.out.println("Vous avez gagné!");
+		if (combiC.equals(combiD)) 
 			return true;
-		} else
+		 else
 			return false;
 	}
 
@@ -77,17 +76,20 @@ public class Mastermind extends Game {
 		
 		Boolean winH = modeChallenger(combiD);
 		
-		System.out.println(("\nL'ordinateur propose: "));
-		Boolean winC = modeDefenseur(combiD);
-		
 		if (winH) {
 			System.out.println("Vous avez gagné!");
 			return true;
-		}else if(winC){
+		}
+		
+		System.out.println(("\nL'ordinateur propose: "));
+		Boolean winC = modeDefenseur(combiD);
+		
+		if(winC){
 			System.out.println("L'ordinateur a gagné!");
 			return true;
-		}else		
-			return false;
+		}		
+			
+		return false;
 	}
 
 }

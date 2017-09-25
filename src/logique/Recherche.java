@@ -69,17 +69,20 @@ public class Recherche extends Game {
 	protected Boolean modeDuel(String combiD) {
 		Boolean winH = modeChallenger(combiD);
 		
-		System.out.println(("\nL'ordinateur propose: "));
-		Boolean winC = modeDefenseur(combiD);
-		
 		if (winH) {
 			System.out.println("Vous avez gagné!");
 			return true;
-		}else if(winC){
+		}
+		
+		System.out.println(("\nL'ordinateur propose: "));
+		Boolean winC = modeDefenseur(combiD);
+		
+		if(winC){
 			System.out.println("L'ordinateur a gagné!");
 			return true;
-		}else		
-			return false;
+		}		
+			
+		return false;
 	}
 	
 	protected String deduireCombinaison() {

@@ -10,7 +10,7 @@ public class PropertiesFile {
 		
 		Properties prop = new Properties();
 		try {
-			InputStream input = new FileInputStream("/Users/juliencauwet/eclipse-workspace/logique/src/config.properties");
+			InputStream input = new FileInputStream("/Users/juliencauwet/eclipse-workspace/logique/src/resources/config.properties");
 			prop.load(input);
 		
 			
