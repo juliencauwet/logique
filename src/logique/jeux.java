@@ -1,6 +1,6 @@
 package logique;
 
-public class jeux {
+abstract public class jeux {
 	public static String rechercheModeChallenger(int nbChiffres,int[] combJ, int[]combO){
 		String result="";
 		for(int i=0;i<nbChiffres;i++) {
@@ -41,28 +41,30 @@ public class jeux {
 		return result;
 	}
 	
-	public static void rechercheModeDefenseur(int nbChiffres,int nbCh){
-		int nbTours=1;
-		int combiSecrete[]= new int[nbChiffres];
-		int combO[]= new int[nbChiffres];
-		int combA[]= new int[nbChiffres];
-		combiSecrete=global.choixCombi(nbChiffres);
-		boolean winTest=false;
-		String result="";
-		
-		combO=global.genereCombi(nbChiffres);
-		
-		do{
-			System.out.println("Proposition de l'ordinateur n°"+ nbTours+": ");
+//	public static void rechercheModeDefenseur(int nbChiffres,int nbCh){
+//		int nbTours=1;
+//		int combiSecrete[]= new int[nbChiffres];
+//		int combO[]= new int[nbChiffres];
+//		int combA[]= new int[nbChiffres];
+//		combiSecrete=global.choixCombi(nbChiffres);
+//		boolean winTest=false;
+//		String result="";
+//		
+//		combO=Game.CombinaisonAleatoire(nbChiffres);
+//		
+//		do{
+//			System.out.println("Proposition de l'ordinateur n°"+ nbTours+": ");
+//	
+//		for(int x: combO)
+//			System.out.print(x);
+//		System.out.print("\n");
+//		result=jeux.rechercheModeChallenger(nbChiffres,combO,combiSecrete);
+//		System.out.println(result);
+//		winTest=java.util.Arrays.equals(combiSecrete, combO);
+//		combA=combO;
+//		combO=global.solutionRecherche(nbChiffres,result,combO,combA, nbTours);
+//		nbTours++;}while(!winTest && nbTours<=nbCh );
+//	}
 	
-		for(int x: combO)
-			System.out.print(x);
-		System.out.print("\n");
-		result=jeux.rechercheModeChallenger(nbChiffres,combO,combiSecrete);
-		System.out.println(result);
-		winTest=java.util.Arrays.equals(combiSecrete, combO);
-		combA=combO;
-		combO=global.solutionRecherche(nbChiffres,result,combO,combA, nbTours);
-		nbTours++;}while(!winTest && nbTours<=nbCh );
-	}
+	
 }
