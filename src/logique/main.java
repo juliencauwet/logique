@@ -3,17 +3,20 @@ package logique;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class Main {
-	public static int nbDigits = 4;
-	public static int chances = 8;
-	public static Boolean dev = true;
+	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits"));
+	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances"));
+	public static Boolean dev = Boolean.valueOf((PropertiesFile.getPropertiesFile("dev")));
 
 	// **************MAIN******************
 	public static void main(String[] args) {
 		char recommencer = 'N';
 		Scanner sc = new Scanner(System.in);
-
+		
 		do {
 			lancement();
 			System.out.println("Voulez-vous recommencer? (O/N)");
@@ -105,3 +108,8 @@ public class Main {
 		}
 	}
 }
+
+
+
+
+
