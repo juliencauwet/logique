@@ -19,8 +19,11 @@ public class Main {
 		
 		do {
 			lancement();
-			System.out.println("Voulez-vous recommencer? (O/N)");
-			recommencer = sc.nextLine().charAt(0);
+			do{
+				System.out.println("Voulez-vous recommencer? (O/N)");
+				recommencer = sc.nextLine().charAt(0);				
+			}while (!reponseCorrecte(recommencer,"ON"));
+			
 		} while (recommencer == 'O');
 
 		System.out.println("Merci et à bientôt!");
@@ -32,6 +35,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int numeroTour = 1;
 		String combiGagnante;
+		String combiDuel;
 		Boolean gagne = false;
 
 		System.out.println("Recherche +/- (1), Mastermind (2)?");
@@ -39,16 +43,22 @@ public class Main {
 		System.out.println("Challenger (1), Défenseur (2), Duel (3)?");
 		choix[1] = sc.nextInt();
 
-		if (choix[1] == 2)
+		if (choix[1] == 2 || choix[1] == 3)
 			combiGagnante = Game.proposerCombinaison();
 		else
 			combiGagnante = Game.combinaisonAleatoire(nbDigits);
+		
+		combiDuel = Game.combinaisonAleatoire(nbDigits);
 
-		if (dev == true)
+		if (dev == true) {
 			System.out.println("combinaison gagnante: " + combiGagnante);
+			
+			if (choix[1] == 3)
+				System.out.println("La combinaison gagnante générée par l'ordinateur est: " + combiDuel);
+		}	
 
 		do {
-			gagne = jouer(choix, combiGagnante);
+			gagne = jouer(choix, combiGagnante, combiDuel);
 			numeroTour++;
 		} while (numeroTour <= chances && gagne == false);
 
@@ -59,7 +69,7 @@ public class Main {
 	}
 
 	// *************JOUER******************
-	static Boolean jouer(int[] option, String combiD) {
+	static Boolean jouer(int[] option, String combiD, String combiDuel) {
 
 		Boolean win = false;
 
@@ -73,7 +83,7 @@ public class Main {
 			} else if (option[1] == 2)
 				win = r.modeDefenseur(combiD);
 			else
-				win = r.modeDuel(combiD);
+				win = r.modeDuel(combiD, combiDuel);
 
 		} else {
 
@@ -85,7 +95,7 @@ public class Main {
 			} else if (option[1] == 2)
 				win = m.modeDefenseur(combiD);
 			else
-				win = m.modeDuel(combiD);
+				win = m.modeDuel(combiD, combiDuel);
 
 		}
 
@@ -106,6 +116,14 @@ public class Main {
 			Mastermind.outcome.remove(j);
 			Mastermind.listePropositions.remove(j);
 		}
+	}
+	
+	static Boolean reponseCorrecte(char rep, String repPossible ) {
+		
+		if (repPossible.indexOf(rep) == -1)
+			return false;
+		else 
+			return true;
 	}
 }
 

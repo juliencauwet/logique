@@ -8,7 +8,7 @@ abstract public class Game {
 
 	abstract protected Boolean modeChallenger(String combiD);
 
-	abstract protected Boolean modeDuel(String combiD);
+	abstract protected Boolean modeDuel(String combiD, String combiOrdi);
 
 	public static String combinaisonAleatoire(int nbDigits) {
 		String combi = "";

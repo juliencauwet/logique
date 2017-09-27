@@ -20,14 +20,11 @@ public class Recherche extends Game {
 	String afficheResultat(String combiDefenseur, String combiChallenger) {
 		
 		String result = "";
-		char tD[] = combiDefenseur.toCharArray();
-		char tC[] = combiChallenger.toCharArray();
 		
-		
-		for (int i = 0 ; i < tD.length ; i++)
-			if (tC[i] == tD[i])
+		for (int i = 0 ; i < combiDefenseur.length() ; i++)
+			if (combiChallenger.charAt(i) == combiDefenseur.charAt(i))
 				result += "=";
-			else if (tC[i] < tD[i])
+			else if (combiChallenger.charAt(i) < combiDefenseur.charAt(i))
 				result += "+";
 			else 
 				result += "-";		
@@ -58,16 +55,16 @@ public class Recherche extends Game {
 		String combiC = sc.nextLine();
 		System.out.println(this.afficheResultat(combiD, combiC));
 		
-		if (combiC.equals(combiD)) {
-			System.out.println("Vous avez gagné!");
+		if (combiC.equals(combiD)) 
 			return true;
-		} else
+		else
 			return false;
 		
 	}
 
-	protected Boolean modeDuel(String combiD) {
-		Boolean winH = modeChallenger(combiD);
+	protected Boolean modeDuel(String combiHumain, String combiOrdi) {
+		
+		Boolean winH = modeChallenger(combiOrdi);
 		
 		if (winH) {
 			System.out.println("Vous avez gagné!");
@@ -75,7 +72,7 @@ public class Recherche extends Game {
 		}
 		
 		System.out.println(("\nL'ordinateur propose: "));
-		Boolean winC = modeDefenseur(combiD);
+		Boolean winC = modeDefenseur(combiHumain);
 		
 		if(winC){
 			System.out.println("L'ordinateur a gagné!");
@@ -84,6 +81,8 @@ public class Recherche extends Game {
 			
 		return false;
 	}
+			
+	
 	
 	protected String deduireCombinaison() {
 		String combi = "";
