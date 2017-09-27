@@ -8,9 +8,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Main {
-	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits"));
-	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances"));
-	public static Boolean dev = Boolean.valueOf((PropertiesFile.getPropertiesFile("dev")));
+	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits")); // nombre de cases 
+	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances")); // nombre d'essais possibles
+	public static Boolean dev = Boolean.valueOf((PropertiesFile.getPropertiesFile("dev"))); // mode développeur
 
 	// **************MAIN******************
 	public static void main(String[] args) {
@@ -29,7 +29,7 @@ public class Main {
 		System.out.println("Merci et à bientôt!");
 	}
 
-	// **********LANCEMENT*****************
+	// pose les questions à l'utilisateur pour connaitre le jeu et le mode
 	public static void lancement() {
 		int[] choix = new int[2];
 		Scanner sc = new Scanner(System.in);
@@ -38,11 +38,15 @@ public class Main {
 		String combiDuel;
 		Boolean gagne = false;
 
-		System.out.println("Recherche +/- (1), Mastermind (2)?");
-		choix[0] = sc.nextInt();
-		System.out.println("Challenger (1), Défenseur (2), Duel (3)?");
-		choix[1] = sc.nextInt();
-
+		do {
+			System.out.println("Recherche +/- (1), Mastermind (2)?");
+			choix[0] = sc.nextInt();
+			}while (!reponseCorrecte((char)(choix[0]+'0'),"12"));
+		do {
+			System.out.println("Challenger (1), Défenseur (2), Duel (3)?");
+			choix[1] = sc.nextInt();
+		}while (!reponseCorrecte((char)(choix[1]+'0'),"123"));
+		
 		if (choix[1] == 2 || choix[1] == 3)
 			combiGagnante = Game.proposerCombinaison();
 		else
@@ -68,7 +72,7 @@ public class Main {
 		miseAZero();
 	}
 
-	// *************JOUER******************
+	// commence le jeu en fonction du choix du menu
 	static Boolean jouer(int[] option, String combiD, String combiDuel) {
 
 		Boolean win = false;
@@ -102,7 +106,7 @@ public class Main {
 		return win;
 	}
 
-	// *************MISEAZERO******************
+	// remet l'ensemble des paramètres à zéro pour recommencer une partie
 	static void miseAZero() {
 		Recherche.tour = 0;
 		Mastermind.tour = 0;
@@ -118,11 +122,13 @@ public class Main {
 		}
 	}
 	
+	// Vérifie si le choix entré est approprié
 	static Boolean reponseCorrecte(char rep, String repPossible ) {
 		
-		if (repPossible.indexOf(rep) == -1)
+		if (repPossible.indexOf(rep) == -1) {
+			System.out.println("Veuillez s'il vous plaît entrer une des options proposées.");
 			return false;
-		else 
+		}else 
 			return true;
 	}
 }

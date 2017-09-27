@@ -24,17 +24,26 @@ abstract public class Game {
 
 		Scanner sc = new Scanner(System.in);
 		String combiD;
+		char rep;
 
-		System.out.println("combinaison aléatoire (1) ou personnalisée (2)?");
-		if (sc.nextInt() == 1)
-			return Game.combinaisonAleatoire(Main.nbDigits);
-		else {
-			System.out.println("Veuillez entrer une combinaison:");
-			sc.nextLine();
-			combiD = sc.nextLine();
-			return combiD;
-		}
-	}
+	
+		do {
+			System.out.println("combinaison aléatoire (1) ou personnalisée (2)?");
+			rep = sc.nextLine().charAt(0);
+			
+			if (rep == '1')
+				return Game.combinaisonAleatoire(Main.nbDigits);
+			else if(rep == '2') {
+				System.out.println("Veuillez entrer une combinaison:");
+				sc.nextLine();
+				combiD = sc.nextLine();
+				return combiD;
+			}
+			
+		} while (rep != '1' && rep != '2');
+		
+		return "Veuillez s'il vous plaît entrer une des options proposées.";
+	}	
 
 	abstract String afficheResultat(String combiDefenseur, String combiChallenger);
 

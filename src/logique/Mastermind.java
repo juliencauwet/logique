@@ -57,9 +57,10 @@ public class Mastermind extends Game {
 
 		System.out.println(this.afficheResultat(combiD, combiC));
 
-		if (combiC.equals(combiD)) 
+		if (combiC.equals(combiD)) { 
+			System.out.println("Vous avez gagné!");
 			return true;
-		 else
+		}else
 			return false;
 	}
 
