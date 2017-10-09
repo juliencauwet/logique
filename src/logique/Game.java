@@ -35,7 +35,6 @@ abstract public class Game {
 				return Game.combinaisonAleatoire(Main.nbDigits);
 			else if(rep == '2') {
 				System.out.println("Veuillez entrer une combinaison:");
-				sc.nextLine();
 				combiD = sc.nextLine();
 				return combiD;
 			}

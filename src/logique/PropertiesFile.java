@@ -1,6 +1,5 @@
 package logique;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -10,7 +9,7 @@ public class PropertiesFile {
 		
 		Properties prop = new Properties();
 		try {
-			InputStream input = new FileInputStream("/Users/juliencauwet/eclipse-workspace/logique/src/resources/config.properties");
+			InputStream input = new FileInputStream("src/resources/config.properties");
 			prop.load(input);
 		
 			
