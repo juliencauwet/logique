@@ -37,11 +37,13 @@ abstract public class Game {
 				System.out.println("Veuillez entrer une combinaison:");
 				combiD = sc.nextLine();
 				return combiD;
-			}
+			}else
+				return "Veuillez s'il vous plaît entrer une des options proposées.";
+			
+			
 			
 		} while (rep != '1' && rep != '2');
 		
-		return "Veuillez s'il vous plaît entrer une des options proposées.";
 	}	
 
 	abstract String afficheResultat(String combiDefenseur, String combiChallenger);
