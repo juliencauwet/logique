@@ -50,17 +50,20 @@ public class Recherche extends Game {
 
 
 	protected Boolean modeChallenger(String combiD) {
+		String combiC;
 		
+		do {
 		System.out.println("Proposez une combinaison de "+ Main.nbDigits +" chiffres: ");
-		String combiC = sc.nextLine();
+		combiC = sc.nextLine();
+		} while(!combinaisonValide(combiC));
+		
 		System.out.println(this.afficheResultat(combiD, combiC));
 		
 		if (combiC.equals(combiD)) { 
 			//System.out.println("Vous avez gagné!");
 			return true;
 		}else
-			return false;
-		
+			return false;		
 	}
 
 	protected Boolean modeDuel(String combiHumain, String combiOrdi) {
@@ -128,8 +131,6 @@ public class Recherche extends Game {
 			chiffre = Integer.toString((dernierChiffre + avantDernierChiffre)/2);
 		
 		return chiffre;
-	}
-	
-	
+	}	
 
 }

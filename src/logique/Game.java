@@ -34,9 +34,11 @@ abstract public class Game {
 			if (rep == '1')
 				return Game.combinaisonAleatoire(Main.nbDigits);
 			else if(rep == '2') {
-				System.out.println("Veuillez entrer une combinaison:");
-				combiD = sc.nextLine();
-				return combiD;
+				do {
+					System.out.println("Veuillez entrer une combinaison à " + Main.nbDigits + " chiffres:");
+					combiD = sc.nextLine();
+				} while(!combinaisonValide(combiD));
+					return combiD;				
 			}else
 				return "Veuillez s'il vous plaît entrer une des options proposées.";
 			
@@ -47,5 +49,18 @@ abstract public class Game {
 	}	
 
 	abstract String afficheResultat(String combiDefenseur, String combiChallenger);
+	
+	public static Boolean combinaisonValide(String combi) {
+		
+		if (combi.length() != Main.nbDigits) 
+			return false;
+		
+		for (int i = 0; i < combi.length() ; i++) {
+			if (combi.charAt(i) < '0' || combi.charAt(i) > '9')
+				return false;			
+		}
+		
+		return true;		
+	}
 
 }
