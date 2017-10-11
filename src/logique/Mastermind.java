@@ -52,13 +52,13 @@ public class Mastermind extends Game {
 
 	protected Boolean modeChallenger(String combiD) {
 
-		System.out.println("Proposez une combinaison: ");
+		System.out.println("Proposez une combinaison de "+ Main.nbDigits +" chiffres: ");
 		String combiC = sc.nextLine();
 
 		System.out.println(this.afficheResultat(combiD, combiC));
 
 		if (combiC.equals(combiD)) { 
-			System.out.println("Vous avez gagné!");
+			//System.out.println("Vous avez gagné!");
 			return true;
 		}else
 			return false;

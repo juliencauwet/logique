@@ -110,16 +110,11 @@ public class Main {
 	static void miseAZero() {
 		Recherche.tour = 0;
 		Mastermind.tour = 0;
-
-		for (int i = 0; i < Recherche.outcome.size(); i++) {
-			Recherche.outcome.remove(i);
-			Recherche.listePropositions.remove(i);
-		}
-
-		for (int j = 0; j < Mastermind.outcome.size(); j++) {
-			Mastermind.outcome.remove(j);
-			Mastermind.listePropositions.remove(j);
-		}
+		Recherche.listePropositions.clear();
+		Mastermind.listePropositions.clear();
+		Recherche.outcome.clear();
+		Mastermind.outcome.clear();
+		
 	}
 	
 	// Vérifie si le choix entré est approprié

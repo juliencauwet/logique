@@ -51,12 +51,12 @@ public class Recherche extends Game {
 
 	protected Boolean modeChallenger(String combiD) {
 		
-		System.out.println("Proposez une combinaison: ");
+		System.out.println("Proposez une combinaison de "+ Main.nbDigits +" chiffres: ");
 		String combiC = sc.nextLine();
 		System.out.println(this.afficheResultat(combiD, combiC));
 		
 		if (combiC.equals(combiD)) { 
-			System.out.println("Vous avez gagné!");
+			//System.out.println("Vous avez gagné!");
 			return true;
 		}else
 			return false;
@@ -121,7 +121,7 @@ public class Recherche extends Game {
 		}	
 		
 		if (avantDernierSigne == '+' && dernierSigne =='+' )
-			chiffre = Integer.toString(dernierChiffre + (9 - dernierChiffre)/2);
+			chiffre = Integer.toString(dernierChiffre + (10 - dernierChiffre)/2);
 		else if (avantDernierSigne == '-' && dernierSigne == '-')
 			chiffre = Integer.toString(dernierChiffre/2);
 		else
