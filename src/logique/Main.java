@@ -43,6 +43,7 @@ public class Main {
 			System.out.println("Recherche +/- (1), Mastermind (2)?");
 			choix[0] = sc.nextInt();
 		} while (!reponseCorrecte((char) (choix[0] + '0'), "12"));
+		
 		do {
 			System.out.println("Challenger (1), Défenseur (2), Duel (3)?");
 			choix[1] = sc.nextInt();
