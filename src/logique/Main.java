@@ -38,17 +38,11 @@ public class Main {
 		String combiGagnante;
 		String combiDuel;
 		Boolean gagne = false;
-
-		do {
-			System.out.println("Recherche +/- (1), Mastermind (2)?");
-			choix[0] = sc.nextInt();
-		} while (!reponseCorrecte((char) (choix[0] + '0'), "12"));
 		
-		do {
-			System.out.println("Challenger (1), Défenseur (2), Duel (3)?");
-			choix[1] = sc.nextInt();
-		} while (!reponseCorrecte((char) (choix[1] + '0'), "123"));
-
+		
+		
+		choix = menu();
+		
 		if (choix[1] == 2 || choix[1] == 3)
 			combiGagnante = Game.proposerCombinaison();
 		else
@@ -72,6 +66,36 @@ public class Main {
 			System.out.println("\nPerdu! La solution était: " + combiGagnante);
 
 		miseAZero();
+	}
+	
+	//Menu: l'utilisateur choisit quel jeu, quel mode, si mode développeur
+
+	static int[] menu() {
+		int [] option = new int [2];
+		Scanner sc = new Scanner(System.in);
+		char rep;
+		
+		do {
+			System.out.println("Souhaitez-vous jouer en mode développeur? (O/N)");
+			rep = sc.nextLine().charAt(0);
+		
+			if (rep == 'O')
+				Main.dev = true;
+			else
+				Main.dev = false;
+		} while (!reponseCorrecte(rep, "ON")); 	
+		
+			
+		do {
+			System.out.println("A quel jeu souhaitez-vous jouer? Recherche +/- (1), Mastermind (2)?");
+			option[0] = sc.nextInt();
+		} while (!reponseCorrecte((char) (option[0] + '0'), "12"));
+	
+		do {
+			System.out.println("Dans quel mode? Challenger (1), Défenseur (2), Duel (3)?");
+			option[1] = sc.nextInt();
+		} while (!reponseCorrecte((char) (option[1] + '0'), "123"));
+		return option;
 	}
 
 	// commence le jeu en fonction du choix du menu
