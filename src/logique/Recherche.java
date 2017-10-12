@@ -51,18 +51,18 @@ public class Recherche extends Game {
 
 	protected Boolean modeChallenger(String combiD) {
 		String combiC;
-		
+
 		do {
-		System.out.println("Proposez une combinaison de "+ Main.nbDigits +" chiffres: ");
-		combiC = sc.nextLine();
-		} while(!combinaisonValide(combiC));
-		
+			System.out.println("Proposez une combinaison de " + Main.nbDigits + " chiffres: ");
+			combiC = sc.nextLine();
+		} while (!combinaisonValide(combiC));
+
 		System.out.println(this.afficheResultat(combiD, combiC));
-		
-		if (combiC.equals(combiD)) { 
-			//System.out.println("Vous avez gagné!");
+
+		if (combiC.equals(combiD)) {
+			// System.out.println("Vous avez gagné!");
 			return true;
-		}else
+		} else
 			return false;		
 	}
 

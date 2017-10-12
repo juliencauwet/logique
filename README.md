@@ -1,4 +1,9 @@
 # logique
+
+Pour compiler le programme, se placer dans le répertoire racine dans le terminal et taper la ligne de commande:
+java -jar Logique.jar
+
+
 Mastermind et Recherche +/- en mode Challenger/Défenseur/Duel
 
 En compilant le programme, le menu va s'ouvrir et vous proposer d'abord le choix entre Recherche +/- et le MAstermind

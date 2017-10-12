@@ -8,22 +8,23 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Main {
-	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits")); // nombre de cases 
-	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances")); // nombre d'essais possibles
+	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits")); // nombre de cases
+	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances")); // nombre d'essais
+																								// possibles
 	public static Boolean dev = Boolean.valueOf((PropertiesFile.getPropertiesFile("dev"))); // mode développeur
 
 	// **************MAIN******************
 	public static void main(String[] args) {
 		char recommencer = 'N';
 		Scanner sc = new Scanner(System.in);
-		
+
 		do {
 			lancement();
-			do{
+			do {
 				System.out.println("Voulez-vous recommencer? (O/N)");
-				recommencer = sc.nextLine().charAt(0);				
-			}while (!reponseCorrecte(recommencer,"ON"));
-			
+				recommencer = sc.nextLine().charAt(0);
+			} while (!reponseCorrecte(recommencer, "ON"));
+
 		} while (recommencer == 'O');
 
 		System.out.println("Merci et à bientôt!");
@@ -41,25 +42,25 @@ public class Main {
 		do {
 			System.out.println("Recherche +/- (1), Mastermind (2)?");
 			choix[0] = sc.nextInt();
-			}while (!reponseCorrecte((char)(choix[0]+'0'),"12"));
+		} while (!reponseCorrecte((char) (choix[0] + '0'), "12"));
 		do {
 			System.out.println("Challenger (1), Défenseur (2), Duel (3)?");
 			choix[1] = sc.nextInt();
-		}while (!reponseCorrecte((char)(choix[1]+'0'),"123"));
-		
+		} while (!reponseCorrecte((char) (choix[1] + '0'), "123"));
+
 		if (choix[1] == 2 || choix[1] == 3)
 			combiGagnante = Game.proposerCombinaison();
 		else
 			combiGagnante = Game.combinaisonAleatoire(nbDigits);
-		
+
 		combiDuel = Game.combinaisonAleatoire(nbDigits);
 
 		if (dev == true) {
 			System.out.println("combinaison gagnante: " + combiGagnante);
-			
+
 			if (choix[1] == 3)
 				System.out.println("La combinaison gagnante générée par l'ordinateur est: " + combiDuel);
-		}	
+		}
 
 		do {
 			gagne = jouer(choix, combiGagnante, combiDuel);
@@ -114,21 +115,16 @@ public class Main {
 		Mastermind.listePropositions.clear();
 		Recherche.outcome.clear();
 		Mastermind.outcome.clear();
-		
+
 	}
-	
+
 	// Vérifie si le choix entré est approprié
-	static Boolean reponseCorrecte(char rep, String repPossible ) {
-		
+	static Boolean reponseCorrecte(char rep, String repPossible) {
+
 		if (repPossible.indexOf(rep) == -1) {
 			System.out.println("Veuillez s'il vous plaît entrer une des options proposées.");
 			return false;
-		}else 
+		} else
 			return true;
 	}
 }
-
-
-
-
-
