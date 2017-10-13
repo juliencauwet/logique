@@ -2,7 +2,11 @@ package logique;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 abstract public class Game {
+	
+	private static final Logger logger = Logger.getLogger(Game.class);
 
 	abstract protected Boolean modeDefenseur(String combiD);
 

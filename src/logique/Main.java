@@ -1,16 +1,15 @@
 package logique;
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 public class Main {
+	private static final Logger logger = Logger.getLogger(Main.class);
+	
 	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits")); // nombre de cases
-	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances")); // nombre d'essais
-																								// possibles
+	public static int chances = Integer.parseInt(PropertiesFile.getPropertiesFile("chances")); // nombre d'essais possibles																								
 	public static Boolean dev = Boolean.valueOf((PropertiesFile.getPropertiesFile("dev"))); // mode développeur
 
 	// **************MAIN******************
@@ -19,6 +18,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 
 		do {
+			logger.log(Level.INFO, "Message d'information");
 			lancement();
 			do {
 				System.out.println("Voulez-vous recommencer? (O/N)");
@@ -32,16 +32,12 @@ public class Main {
 
 	// pose les questions à l'utilisateur pour connaitre le jeu et le mode
 	public static void lancement() {
-		int[] choix = new int[2];
+		int[] choix = menu();
 		Scanner sc = new Scanner(System.in);
 		int numeroTour = 1;
 		String combiGagnante;
 		String combiDuel;
 		Boolean gagne = false;
-		
-		
-		
-		choix = menu();
 		
 		if (choix[1] == 2 || choix[1] == 3)
 			combiGagnante = Game.proposerCombinaison();
@@ -95,6 +91,7 @@ public class Main {
 			System.out.println("Dans quel mode? Challenger (1), Défenseur (2), Duel (3)?");
 			option[1] = sc.nextInt();
 		} while (!reponseCorrecte((char) (option[1] + '0'), "123"));
+		
 		return option;
 	}
 
