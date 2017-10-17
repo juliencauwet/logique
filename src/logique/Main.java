@@ -18,7 +18,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 
 		do {
-			logger.log(Level.INFO, "Message d'information");
+			logger.log(Level.INFO, "Le logiciel s'est mis en marche avec succès.");
 			lancement();
 			do {
 				System.out.println("Voulez-vous recommencer? (O/N)");
@@ -137,6 +137,7 @@ public class Main {
 		Mastermind.listePropositions.clear();
 		Recherche.outcome.clear();
 		Mastermind.outcome.clear();
+		Mastermind.chiffresTrouves = 0;
 
 	}
 

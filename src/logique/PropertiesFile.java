@@ -16,8 +16,6 @@ public class PropertiesFile {
 		Properties prop = new Properties();
 
 		try {
-			logger.log(Level.ERROR, "Certaines valeurs de variable n'ont pas pu être récupérées dans le fichier config.properties. Elles ont donc été attribuées par défaut.");
-			
 			InputStream input = new FileInputStream("src/resources/config.properties");
 			prop.load(input);
 		} catch (Exception e) {
