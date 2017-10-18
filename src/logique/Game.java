@@ -23,39 +23,55 @@ abstract public class Game {
 	public static String proposerCombinaison() {
 
 		Scanner sc = new Scanner(System.in);
-		String combiD;
+		String combiD = "";
 		char rep;
 
-		do {
-			System.out.println("combinaison aléatoire (1) ou personnalisée (2)?");
-			rep = sc.nextLine().charAt(0);
+		System.out.println();
+		rep = saisieUtilisateur("combinaison aléatoire (1) ou personnalisée (2)?", "12");
 
-			if (rep == '1')
-				return Game.combinaisonAleatoire(Main.nbDigits);
-			else if (rep == '2') {
-				do {
-					System.out.println("Veuillez entrer une combinaison à " + Main.nbDigits + " chiffres:");
-					combiD = sc.nextLine();
-				} while (!combinaisonValide(combiD));
-				return combiD;
-			} else
-				return "Veuillez s'il vous plaît entrer une des options proposées.";
+		if (rep == '1')
+			return Game.combinaisonAleatoire(Main.nbDigits);
+		else if (rep == '2') {
 
-		} while (rep != '1' && rep != '2');
+			do {
+				System.out.println("Veuillez entrer une combinaison à " + Main.nbDigits + " chiffres:");
+				combiD = sc.next();
+			} while (!combinaisonValide(combiD));
+		}
+			return combiD;
 
 	}
 
 	public static Boolean combinaisonValide(String combi) {
 
-		if (combi.length() != Main.nbDigits)
-			return false;
-
 		for (int i = 0; i < combi.length(); i++) {
-			if (combi.charAt(i) < '0' || combi.charAt(i) > '9')
+			if (combi.charAt(i) < '0' || combi.charAt(i) > '9' || combi.length() != Main.nbDigits) {
+				System.out.println("Combinaison invalide.");
 				return false;
+			}
 		}
 
 		return true;
+	}
+
+	static char saisieUtilisateur(String question, String repPossible) {
+		String rep = "";
+		Scanner sc = new Scanner(System.in);
+
+		do {
+
+			try {
+				System.out.println(question);
+				rep = sc.nextLine();
+			} catch (StringIndexOutOfBoundsException e) {
+			}
+
+			if (repPossible.indexOf(rep.charAt(0)) == -1 || rep.length() != 1)
+				System.out.println("Veuillez s'il vous plaît entrer une des options proposées.\n");
+
+		} while (repPossible.indexOf(rep.charAt(0)) == -1 || rep.length() != 1);
+
+		return rep.charAt(0);
 	}
 
 }

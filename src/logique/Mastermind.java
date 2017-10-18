@@ -1,14 +1,11 @@
 package logique;
 
 import java.util.ArrayList;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import java.util.Scanner;
 
 public class Mastermind extends Game {
 
-	private static final Logger logger = Logger.getLogger(Mastermind.class);
 
 	public static int tour = 0;
 	public static int chiffresTrouves = 0;
@@ -115,7 +112,7 @@ public class Mastermind extends Game {
 			}
 
 			System.out.println(resultat[0] + " bien placés et " + resultat[1] + " présents.");
-			System.out.println(chiffresTrouves);
+	
 			return false;
 		}
 

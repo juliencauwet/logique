@@ -5,7 +5,9 @@ import java.util.Scanner;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-public class Main {
+import java.lang.StringIndexOutOfBoundsException;
+
+public class Main extends Exception {
 	private static final Logger logger = Logger.getLogger(Main.class);
 	
 	public static int nbDigits = Integer.parseInt(PropertiesFile.getPropertiesFile("nbDigits")); // nombre de cases
@@ -15,17 +17,15 @@ public class Main {
 	// **************MAIN******************
 	public static void main(String[] args) {
 		char recommencer = 'N';
-		Scanner sc = new Scanner(System.in);
 
 		do {
 			logger.log(Level.INFO, "Le logiciel s'est mis en marche avec succès.");
+			
 			lancement();
-			do {
-				System.out.println("Voulez-vous recommencer? (O/N)");
-				recommencer = sc.nextLine().charAt(0);
-			} while (!reponseCorrecte(recommencer, "ON"));
-
-		} while (recommencer == 'O');
+			
+			recommencer = saisieUtilisateur("Voulez-vous recommencer? (O/N)", "OoNn");
+		
+		} while (recommencer == 'O' || recommencer == 'o');
 
 		System.out.println("Merci et à bientôt!");
 	}
@@ -68,29 +68,20 @@ public class Main {
 
 	static int[] menu() {
 		int [] option = new int [2];
-		Scanner sc = new Scanner(System.in);
 		char rep;
+					
+			rep = saisieUtilisateur("Souhaitez-vous jouer en mode développeur? (O/N)", "oOnN");
 		
-		do {
-			System.out.println("Souhaitez-vous jouer en mode développeur? (O/N)");
-			rep = sc.nextLine().charAt(0);
-		
-			if (rep == 'O')
+			if (rep == 'O' || rep == 'o')
 				Main.dev = true;
 			else
 				Main.dev = false;
-		} while (!reponseCorrecte(rep, "ON")); 	
 		
-			
-		do {
-			System.out.println("A quel jeu souhaitez-vous jouer? Recherche +/- (1), Mastermind (2)?");
-			option[0] = sc.nextInt();
-		} while (!reponseCorrecte((char) (option[0] + '0'), "12"));
+			rep =  saisieUtilisateur("A quel jeu souhaitez-vous jouer? Recherche +/- (1), Mastermind (2)?", "12");
+			option[0] = Character.getNumericValue(rep);
 	
-		do {
-			System.out.println("Dans quel mode? Challenger (1), Défenseur (2), Duel (3)?");
-			option[1] = sc.nextInt();
-		} while (!reponseCorrecte((char) (option[1] + '0'), "123"));
+			rep =  saisieUtilisateur("Dans quel mode? Challenger (1), Défenseur (2), Duel (3)?", "123");
+			option[1] = Character.getNumericValue(rep);
 		
 		return option;
 	}
@@ -142,12 +133,23 @@ public class Main {
 	}
 
 	// Vérifie si le choix entré est approprié
-	static Boolean reponseCorrecte(char rep, String repPossible) {
-
-		if (repPossible.indexOf(rep) == -1) {
-			System.out.println("Veuillez s'il vous plaît entrer une des options proposées.");
-			return false;
-		} else
-			return true;
+	static char saisieUtilisateur(String question, String repPossible) {
+		String rep = "";
+		Scanner sc = new Scanner(System.in);
+		
+		do {
+			System.out.println(question);
+			try {
+			rep = sc.next();
+			}catch(StringIndexOutOfBoundsException e) {	
+				System.out.println("pas bon");
+			}
+			
+			if (repPossible.indexOf(rep.charAt(0)) == -1 || rep.length() !=1)
+				System.out.println("Veuillez s'il vous plaît entrer une des options proposées.\n");
+			
+		}while (repPossible.indexOf(rep.charAt(0)) == -1 || rep.length() !=1);
+		
+		return rep.charAt(0);
 	}
 }
