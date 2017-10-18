@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
+/** Classe qui contien toutes les méthodes nécessaires au jeu Mastermind */
 public class Mastermind extends Game {
-
 
 	public static int tour = 0;
 	public static int chiffresTrouves = 0;
@@ -18,6 +18,16 @@ public class Mastermind extends Game {
 
 	Scanner sc = new Scanner(System.in);
 
+	/**
+	 * affiche le nombre de chiffres de la combinaison du Challenger qui sont
+	 * présents ou à la bonne place dans la combinaison du défenseur
+	 * 
+	 * @param combiD
+	 *            combinaison du défenseur
+	 * @param combiC
+	 *            combianison du Challenger
+	 * @return résultat
+	 */
 	protected int[] afficheResultat(String combiD, String combiC) {
 
 		int[] result = new int[2];
@@ -63,12 +73,20 @@ public class Mastermind extends Game {
 		return result;
 	}
 
+	/**
+	 * demande à l'utilisateur de rentrer une combinaison du nombre de chiffres de
+	 * la combinaison gagnante
+	 * 
+	 * @param combiD
+	 * @return true si la combinaison est gagnante
+	 * @see Mastermind#combinaisonValide(String)
+	 */
 	protected Boolean modeChallenger(String combiD) {
 		String combiC;
 
 		do {
 			System.out.println("Proposez une combinaison de " + Main.nbDigits + " chiffres: ");
-			combiC = sc.nextLine();
+			combiC = sc.next();
 		} while (!combinaisonValide(combiC));
 
 		int[] result = this.afficheResultat(combiD, combiC);
@@ -82,6 +100,11 @@ public class Mastermind extends Game {
 			return false;
 	}
 
+	/**
+	 * propose des combinaisons pour essayer de trouver la combinaison
+	 * 
+	 * @param combiD
+	 */
 	protected Boolean modeDefenseur(String combiD) {
 		String combiC = "";
 		int[] resultat = new int[2];
@@ -112,7 +135,7 @@ public class Mastermind extends Game {
 			}
 
 			System.out.println(resultat[0] + " bien placés et " + resultat[1] + " présents.");
-	
+
 			return false;
 		}
 
@@ -132,6 +155,16 @@ public class Mastermind extends Game {
 			return false;
 	}
 
+	/**
+	 * Lance alternativement le mode Challenger et le mode Duel pour faire jouer
+	 * l'humain et l'utilisateur à tour de rôle
+	 * 
+	 * @see Mastermind#modeChallenger(String)
+	 * @see Mastermind#modeDefenseur(String)
+	 * @param combiHumain
+	 * @param combiOrdi
+	 * @return true si l'un des joueurs a gané
+	 */
 	protected Boolean modeDuel(String combiHumain, String combiOrdi) {
 
 		Boolean winH = modeChallenger(combiOrdi);
