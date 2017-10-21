@@ -47,8 +47,8 @@ public class Main extends Exception {
 		if (dev == true) {
 			System.out.println("combinaison gagnante: " + combiGagnante);
 
-			if (choix[1] == 3)
-				System.out.println("La combinaison gagnante générée par l'ordinateur est: " + combiDuel);
+		if (choix[1] == 3)
+			System.out.println("La combinaison gagnante générée par l'ordinateur est: " + combiDuel);
 		}
 
 		do {
@@ -137,6 +137,7 @@ public class Main extends Exception {
 		Recherche.outcome.clear();
 		Mastermind.outcome.clear();
 		Mastermind.chiffresTrouves = 0;
+		Mastermind.listeCombi.clear();
 
 	}
 

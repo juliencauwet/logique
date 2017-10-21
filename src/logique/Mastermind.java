@@ -9,8 +9,10 @@ public class Mastermind extends Game {
 
 	public static int tour = 0;
 	public static int chiffresTrouves = 0;
-	public static ArrayList<Integer> outcome = new ArrayList<Integer>();
+	public static ArrayList<String> outcome = new ArrayList<String>();
 	public static ArrayList<String> listePropositions = new ArrayList<String>();
+	public static char[] chiffres = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	public static ArrayList<String> listeCombi = new ArrayList<String>();
 
 	public Mastermind() {
 		tour++;
@@ -99,60 +101,141 @@ public class Mastermind extends Game {
 		} else
 			return false;
 	}
-
-	/**
-	 * propose des combinaisons pour essayer de trouver la combinaison
-	 * 
-	 * @param combiD
-	 */
+	
+	/**Procède aux différentes étapes et appelles les méthodes pour que l'ordinateur propose des solutions */
 	protected Boolean modeDefenseur(String combiD) {
-		String combiC = "";
-		int[] resultat = new int[2];
+		int[] t = new int[2];
+		String combiC;
 
-		// Tant que le nombre de chiffres de la combinaison ne sont pas trouvés
-		while (chiffresTrouves < Main.nbDigits) {
+		if (tour == 1)
+			combinaisonsPossibles(Main.nbDigits);
 
-			// si 1er tour, la combinaison est 0000 et sinon elle s'incrémente de 1
-			if (tour == 1)
-				combiC = "0000";
-			else {
-				for (int i = 0; i < Main.nbDigits; i++)
-					combiC += (char) (tour - 1 + '0');
-			}
+		int hasard = (int) (Math.random() * listeCombi.size());
 
-			// archivage et affichage de la combinaison
-			listePropositions.add(combiC);
-			System.out.println(combiC);
+		combiC = listeCombi.get(hasard);
 
-			resultat = this.afficheResultat(combiD, combiC);
+		t = afficheResultat(combiD, combiC);
 
-			// si il y a des chiffres à la bonne place, on les ajoute à chiffresTrouves
-			if (resultat[0] > 0) {
-				chiffresTrouves += resultat[0];
-				// et on les assemble avec les autres chiffres gagnants
-				for (int i = 0; i < resultat[0]; i++)
-					outcome.add(tour - 1);
-			}
-
-			System.out.println(resultat[0] + " bien placés et " + resultat[1] + " présents.");
-
-			return false;
-		}
-
-		// quand tous les chiffres ont été trouvés, on en fait une combinaison pour
-		// connaitre le résultat
-		for (int c : outcome)
-			combiC += Integer.toString(c);
+		eliminerCombinaisons(t, combiC);
 
 		System.out.println(combiC);
-		resultat = this.afficheResultat(combiD, combiC);
-		System.out.println(resultat[0] + " bien placés et " + resultat[1] + " présents.");
+		System.out.println(t[0] + " bien placés et " + t[1] + " présents. ");
 
 		if (combiC.equals(combiD)) {
 			System.out.println("L'ordinateur a gagné!");
 			return true;
 		} else
 			return false;
+	}
+
+	/**2dite la liste des combinaisons possibles en fonction du nombre de chiffres dans la combinaison
+	 * @param nbChiffres nombre de chiffres dans la combinaison */
+	public static void combinaisonsPossibles(int nbChiffres) {
+
+		for (int i = 0; i < Math.pow(10, nbChiffres); i++) {
+			String combi = Integer.toString(i);
+
+			while (combi.length() < nbChiffres)
+				combi = '0' + combi;
+
+			listeCombi.add(combi);
+		}
+	}
+	
+	/**Affiche la liste des combinaisons possibles*/
+	public static void afficherCombinaisonsPossibles() {
+
+		for (String str : listeCombi)
+			System.out.print(str + "  ");
+	}
+
+	/**Passe la combinaison dans les différents filtres
+	 * @param result tableau de résultat des éléments présents et bien placés
+	 * @param combi combinaison proposée  */
+	public static void eliminerCombinaisons(int[] result, String combi) {
+
+		// s'il n'y a ni bien placé ni présent
+		if (result[0] == 0 && result[1] == 0)
+			pasPresent(combi);
+
+		// si il y a ou moins 1 bien présent
+		if (result[1] > 0)
+			auMoinsUnPresent(combi, result[1]);
+
+		// si il y a ou moins 1 bien placé
+		if (result[0] > 0)
+			auMoinsUnBienPlace(combi, result[0]);
+	}
+
+	/**
+	 * Filtre éliminant les combinaisons qui n'ont pas au moins un des chiffres
+	 * présent
+	 * 
+	 * @param combi
+	 *            combinaison proposée
+	 * @param nbPresent
+	 *            nombre de chiffres présent
+	 */
+	public static void auMoinsUnPresent(String combi, int nbPresent) {
+
+		for (int i = 0; i < listeCombi.size(); i++) {
+			String str = listeCombi.get(i);
+
+			int j = 0;
+			int total = 0;
+
+			do {
+				if (str.indexOf(combi.charAt(j)) != -1)
+					total++;
+				j++;
+			} while (total < nbPresent && j < combi.length());
+
+			if (total < nbPresent) {
+				listeCombi.remove(i);
+				i--;
+			}
+		}
+	}
+
+	public static void auMoinsUnBienPlace(String combi, int nbBienPlaces) {
+		for (int i = 0; i < listeCombi.size(); i++) {
+			String str = listeCombi.get(i);
+			int j = 0;
+			int total = 0;
+
+			do {
+				if (combi.charAt(j) == str.charAt(j))
+					total++;
+				j++;
+			} while (total < nbBienPlaces && j < combi.length());
+
+			if (total < nbBienPlaces) {
+				listeCombi.remove(i);
+				i--;
+			}
+		}
+	}
+
+	public static void pasPresent(String combi) {
+
+		for (int i = 0; i < listeCombi.size(); i++) {
+			String str = listeCombi.get(i);
+			int j = 0;
+
+			Boolean dedans = false;
+
+			do {
+				if (str.indexOf(combi.charAt(j)) != -1)
+					dedans = true;
+
+				if (dedans) {
+					listeCombi.remove(i);
+					i--;
+				}
+
+				j++;
+			} while (j < combi.length() && !dedans);
+		}
 	}
 
 	/**
