@@ -84,7 +84,8 @@ public class Recherche extends Game {
 		System.out.println(this.afficheResultat(combiD, combiC));
 
 		if (combiC.equals(combiD)) {
-			// System.out.println("Vous avez gagné!");
+			System.out.println("Vous avez gagné!");
+			
 			return true;
 		} else
 			return false;
@@ -104,18 +105,14 @@ public class Recherche extends Game {
 
 		Boolean winH = modeChallenger(combiOrdi);
 
-		if (winH) {
-			System.out.println("Vous avez gagné!");
+		if (winH) 
 			return true;
-		}
 
 		System.out.println(("\nL'ordinateur propose: "));
 		Boolean winC = modeDefenseur(combiHumain);
 
-		if (winC) {
-			System.out.println("L'ordinateur a gagné!");
+		if (winC) 
 			return true;
-		}
 
 		return false;
 	}

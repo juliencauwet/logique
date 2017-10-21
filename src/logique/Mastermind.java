@@ -240,7 +240,7 @@ public class Mastermind extends Game {
 
 	/**
 	 * Lance alternativement le mode Challenger et le mode Duel pour faire jouer
-	 * l'humain et l'utilisateur à tour de rôle
+	 * l'humain et l'ordinateur à tour de rôle
 	 * 
 	 * @see Mastermind#modeChallenger(String)
 	 * @see Mastermind#modeDefenseur(String)
@@ -252,18 +252,14 @@ public class Mastermind extends Game {
 
 		Boolean winH = modeChallenger(combiOrdi);
 
-		if (winH) {
-			System.out.println("Vous avez gagné!");
+		if (winH) 
 			return true;
-		}
 
 		System.out.println(("\nL'ordinateur propose: "));
 		Boolean winC = modeDefenseur(combiHumain);
 
-		if (winC) {
-			System.out.println("L'ordinateur a gagné!");
+		if (winC) 
 			return true;
-		}
 
 		return false;
 	}
