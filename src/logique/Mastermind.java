@@ -190,7 +190,7 @@ public class Mastermind extends Game {
 				j++;
 			} while (total < nbPresent && j < combi.length());
 
-			if (total < nbPresent) {
+			if (total < nbPresent || combi.equals(str)) {
 				listeCombi.remove(i);
 				i--;
 			}
@@ -209,7 +209,7 @@ public class Mastermind extends Game {
 				j++;
 			} while (total < nbBienPlaces && j < combi.length());
 
-			if (total < nbBienPlaces) {
+			if (total < nbBienPlaces || combi.equals(str)) {
 				listeCombi.remove(i);
 				i--;
 			}
@@ -228,7 +228,7 @@ public class Mastermind extends Game {
 				if (str.indexOf(combi.charAt(j)) != -1)
 					dedans = true;
 
-				if (dedans) {
+				if (dedans || combi.equals(str)) {
 					listeCombi.remove(i);
 					i--;
 				}
