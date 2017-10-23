@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
-/** Classe qui contien toutes les méthodes nécessaires au jeu Mastermind */
+/** Classe qui contien toutes les méthodes nécessaires au jeu Mastermind 
+ * @see Main
+ * @see Game
+ */
 public class Mastermind extends Game {
 
 	public static int tour = 0;
-	public static int chiffresTrouves = 0;
-	public static ArrayList<String> outcome = new ArrayList<String>();
-	public static ArrayList<String> listePropositions = new ArrayList<String>();
-	public static char[] chiffres = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 	public static ArrayList<String> listeCombi = new ArrayList<String>();
 
 	public Mastermind() {
@@ -101,8 +100,11 @@ public class Mastermind extends Game {
 		} else
 			return false;
 	}
-	
-	/**Procède aux différentes étapes et appelles les méthodes pour que l'ordinateur propose des solutions */
+
+	/**
+	 * Procède aux différentes étapes et appelles les méthodes pour que l'ordinateur
+	 * propose des solutions
+	 */
 	protected Boolean modeDefenseur(String combiD) {
 		int[] t = new int[2];
 		String combiC;
@@ -128,8 +130,13 @@ public class Mastermind extends Game {
 			return false;
 	}
 
-	/**2dite la liste des combinaisons possibles en fonction du nombre de chiffres dans la combinaison
-	 * @param nbChiffres nombre de chiffres dans la combinaison */
+	/**
+	 * 2dite la liste des combinaisons possibles en fonction du nombre de chiffres
+	 * dans la combinaison
+	 * 
+	 * @param nbChiffres
+	 *            nombre de chiffres dans la combinaison
+	 */
 	public static void combinaisonsPossibles(int nbChiffres) {
 
 		for (int i = 0; i < Math.pow(10, nbChiffres); i++) {
@@ -141,17 +148,22 @@ public class Mastermind extends Game {
 			listeCombi.add(combi);
 		}
 	}
-	
-	/**Affiche la liste des combinaisons possibles*/
+
+	/** Affiche la liste des combinaisons possibles */
 	public static void afficherCombinaisonsPossibles() {
 
 		for (String str : listeCombi)
 			System.out.print(str + "  ");
 	}
 
-	/**Passe la combinaison dans les différents filtres
-	 * @param result tableau de résultat des éléments présents et bien placés
-	 * @param combi combinaison proposée  */
+	/**
+	 * Passe la combinaison dans les différents filtres
+	 * 
+	 * @param result
+	 *            tableau de résultat des éléments présents et bien placés
+	 * @param combi
+	 *            combinaison proposée
+	 */
 	public static void eliminerCombinaisons(int[] result, String combi) {
 
 		// s'il n'y a ni bien placé ni présent
@@ -197,6 +209,15 @@ public class Mastermind extends Game {
 		}
 	}
 
+	/**
+	 * Filtre éliminant les combinaisons qui n'ont pas au moins un des chiffres bien
+	 * placés
+	 * 
+	 * @param combi
+	 *            combinaison proposée
+	 * @param nbBienPlaces
+	 *            nombre de chiffres bien placés
+	 */
 	public static void auMoinsUnBienPlace(String combi, int nbBienPlaces) {
 		for (int i = 0; i < listeCombi.size(); i++) {
 			String str = listeCombi.get(i);
@@ -216,6 +237,13 @@ public class Mastermind extends Game {
 		}
 	}
 
+	/**
+	 * Filtre éliminant les combinaisons qui n'ont pas du tout de chiffres bien
+	 * placés
+	 * 
+	 * @param combi
+	 *            combinaison proposée
+	 */
 	public static void pasPresent(String combi) {
 
 		for (int i = 0; i < listeCombi.size(); i++) {
@@ -252,13 +280,13 @@ public class Mastermind extends Game {
 
 		Boolean winH = modeChallenger(combiOrdi);
 
-		if (winH) 
+		if (winH)
 			return true;
 
 		System.out.println(("\nL'ordinateur propose: "));
 		Boolean winC = modeDefenseur(combiHumain);
 
-		if (winC) 
+		if (winC)
 			return true;
 
 		return false;

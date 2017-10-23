@@ -5,6 +5,12 @@ import java.util.Scanner;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+/** Classe principale de logique 
+ * @see Game
+ * @see PropertiesFile
+ * @author Julien Cauwet
+ * @version 1.0
+ */
 public class Main extends Exception {
 	private static final Logger logger = Logger.getLogger(Main.class);
 
@@ -13,7 +19,8 @@ public class Main extends Exception {
 																								// possibles
 	public static Boolean dev = Boolean.valueOf((PropertiesFile.getPropertiesFile("dev"))); // mode développeur
 
-	// **************MAIN******************
+	/** Départ de l'application
+	 * @param args format */
 	public static void main(String[] args) {
 		char recommencer = 'N';
 
@@ -27,6 +34,7 @@ public class Main extends Exception {
 		} while (recommencer == 'O' || recommencer == 'o');
 
 		System.out.println("Merci et à bientôt!");
+		logger.log(Level.INFO, "Vous sortez du jeu.");
 	}
 
 	/** pose les questions à l'utilisateur pour connaitre le jeu et le mode */
@@ -47,8 +55,8 @@ public class Main extends Exception {
 		if (dev == true) {
 			System.out.println("combinaison gagnante: " + combiGagnante);
 
-		if (choix[1] == 3)
-			System.out.println("La combinaison gagnante générée par l'ordinateur est: " + combiDuel);
+			if (choix[1] == 3)
+				System.out.println("La combinaison gagnante générée par l'ordinateur est: " + combiDuel);
 		}
 
 		do {
@@ -60,20 +68,23 @@ public class Main extends Exception {
 			System.out.println("\nPerdu! La solution était: " + combiGagnante);
 
 		miseAZero();
+		logger.log(Level.INFO, "Toutes les variables ont été réinitialisées.");
 	}
 
 	/** Menu: l'utilisateur choisit quel jeu, quel mode, si mode développeur */
-
 	static int[] menu() {
 		int[] option = new int[2];
 		char rep;
 
 		rep = saisieUtilisateur("Souhaitez-vous jouer en mode développeur? (O/N)", "oOnN");
 
-		if (rep == 'O' || rep == 'o')
+		if (rep == 'O' || rep == 'o') {
 			Main.dev = true;
-		else
+			logger.log(Level.INFO, "Le mode développeur est activé");
+		}else {
 			Main.dev = false;
+			logger.log(Level.INFO, "Le mode développeur est désactivé");
+		}
 
 		rep = saisieUtilisateur("A quel jeu souhaitez-vous jouer? Recherche +/- (1), Mastermind (2)?", "12");
 		option[0] = Character.getNumericValue(rep);
@@ -133,12 +144,8 @@ public class Main extends Exception {
 		Recherche.tour = 0;
 		Mastermind.tour = 0;
 		Recherche.listePropositions.clear();
-		Mastermind.listePropositions.clear();
 		Recherche.outcome.clear();
-		Mastermind.outcome.clear();
-		Mastermind.chiffresTrouves = 0;
 		Mastermind.listeCombi.clear();
-
 	}
 
 	/**

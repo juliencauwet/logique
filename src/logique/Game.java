@@ -2,13 +2,24 @@ package logique;
 
 import java.util.Scanner;
 
-/** Classe mère des 2 jeux Recherche et Mastermind */
+/** Classe mère des 2 jeux Recherche et Mastermind
+ * @see Recherche
+ * @see Mastermind */
 abstract public class Game {
-
+	
+	/** mode défenseur méthode abstraite présent dans les classes filles
+	 * @param combiD combinaison du défenseur
+	 * */
 	abstract protected Boolean modeDefenseur(String combiD);
 
+	/** mode Challenger méthode abstraite présent dans les classes filles
+	 * @param combiD combinaison du défenseur
+	 * */
 	abstract protected Boolean modeChallenger(String combiD);
 
+	/** mode Duel méthode abstraite présent dans les classes filles
+	 * @param combiD combinaison du défenseur
+	 * */
 	abstract protected Boolean modeDuel(String combiD, String combiOrdi);
 
 	/**
@@ -62,7 +73,9 @@ abstract public class Game {
 
 	/**
 	 * Vérifie que la combinaison est conforme aux paramètre et envoie un message
-	 * d'erreur si elle ne l'est pas
+	 * d'erreur si elle ne l'est pas;
+	 * @param combi combinaison à vérifier
+	 * @return true si la combinaison est valide
 	 */
 	public static Boolean combinaisonValide(String combi) {
 
@@ -81,9 +94,9 @@ abstract public class Game {
 	 * l'utilisateur est approprié
 	 * 
 	 * @param question
-	 *            à afficher
+	 *           Question à afficher
 	 * @param repPossible
-	 *            ensemble des choix possibles sous forme de String
+	 *            Ensemble des choix possibles sous forme de String
 	 * @return le choix de l'utilisateur
 	 */
 	static char saisieUtilisateur(String question, String repPossible) {

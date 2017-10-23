@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
-/** Classe qui contien toutes les méthodes nécessaires au jeu Recherche */
+/** Classe qui contient toutes les méthodes nécessaires au jeu Recherche 
+ * @see Game
+ */
 public class Recherche extends Game {
 
 	public static int tour = 0;
@@ -85,7 +87,7 @@ public class Recherche extends Game {
 
 		if (combiC.equals(combiD)) {
 			System.out.println("Vous avez gagné!");
-			
+
 			return true;
 		} else
 			return false;
@@ -105,13 +107,13 @@ public class Recherche extends Game {
 
 		Boolean winH = modeChallenger(combiOrdi);
 
-		if (winH) 
+		if (winH)
 			return true;
 
 		System.out.println(("\nL'ordinateur propose: "));
 		Boolean winC = modeDefenseur(combiHumain);
 
-		if (winC) 
+		if (winC)
 			return true;
 
 		return false;
